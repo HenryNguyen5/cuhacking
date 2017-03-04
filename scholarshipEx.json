@@ -1,0 +1,11 @@
+data:{
+  "id": "EntranceScholarship",
+  "type":"scholarship",
+  "attributes":{
+    "name": "Entrance Scholarship",
+    "description": "Easy Money",
+    "value": 1000,
+    "releaseDate": "09/09/2017",
+    "deadline": "09/01/2017"
+  }
+}
