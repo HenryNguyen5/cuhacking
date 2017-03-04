@@ -12,5 +12,9 @@
   "devDependencies": {
     "embark": "^2.3.3",
     "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "eslint": "^3.17.0",
+    "ethereumjs-testrpc": "^3.0.3"
   }
 }
