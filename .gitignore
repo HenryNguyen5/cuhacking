@@ -27,10 +27,9 @@ coverage
 build/Release
 
 # Dependency directories
-node_modules
-jspm_packages
-.embark
-dist
+scholarChain/node_modules
+scholarChain/.embark
+scholarChain/dist
 scholarChain/chains.json
 # Optional npm cache directory
 .npm
