@@ -2,16 +2,8 @@
   "0xb6cfeab83614da04c03db0fb8a6787a45d0be8d576fcc6f8f457a5a816d22ab3": {
     "name": "development",
     "contracts": {
-      "0x75597bd7e05d7ca41e548c730f3a12e1f21f0f1f75c9db60c3c8e257e3d0793e": {
-        "address": "0x11312c90716933569375be0026bc8274bad3611b",
-        "name":    "ScholarChain"
-      },
-      "0x880a0cf7196f111c7e08ebf67c2cc726697f81b4f495bb24d552dad460252e9f": {
-        "address": "0x7f78e18693a05b7498775e0cb19310bed182e130",
-        "name":    "SimpleStorage"
-      },
       "0xad0ab10070707a8d9b7c32eae670ce9a0f75e0b6532d576bca60d0fd8059735d": {
-        "address": "0x09fcba7c5222a614187f56334987f700621f45c6",
+        "address": "0x387588127c16a5012c62a53055ea3cd2407f21da",
         "name":    "SimpleStorage"
       }
     }

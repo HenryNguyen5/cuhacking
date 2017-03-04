@@ -12,7 +12,7 @@ $(document).ready(function() {
   EmbarkJS.Storage.setProvider('ipfs',{server: 'localhost', port: '5001'});
 
   $("#register button.submit").click(function() {
-    var value = $("#register input.bank").val();
+    //var value = $("#register input.bank").val();
     let s =  {
       "name": "Entrance Scholarship",
       "description": "Easy Money",
@@ -23,7 +23,7 @@ $(document).ready(function() {
     EmbarkJS.Storage.saveText(JSON.stringify(s)).then((hash) => {
       console.log("scholarship was saved with hash" + hash);
     });
-    addToLog("#storage", "EmbarkJS.Storage.saveText('" + value + "').then(function(hash) { })");
+    //addToLog("#register", "EmbarkJS.Storage.saveText('" + value + "').then(function(hash) { })");
   });
 
 });

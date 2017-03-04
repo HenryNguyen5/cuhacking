@@ -4025,7 +4025,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-lg,
 .btn-group-lg > .btn {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 36px;
   line-height: 1.3333333;
   border-radius: 6px;
 }
@@ -7349,7 +7349,7 @@ button.close {
 
 
 div {
-  margin: 15px;
+  margin: 5px;
 }
 
 .logs {
@@ -7372,4 +7372,3 @@ div {
 .nav-tabs {
   margin-bottom: 0;
 }
-
