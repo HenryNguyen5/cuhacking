@@ -84216,13 +84216,4 @@ $(document).ready(function() {
     addToLog("#storage", "EmbarkJS.Storage.saveText('" + value + "').then(function(hash) { })");
   });
 
-  $("#storage button.loadIpfsHash").click(function() {
-    var value = $("#storage input.textHash").val();
-    EmbarkJS.Storage.get(value).then(function(content) {
-      $("span.ipfsText").html(content);
-    });
-    addToLog("#storage", "EmbarkJS.Storage.get('" + value + "').then(function(content) { })");
-  });
-
 });
-
