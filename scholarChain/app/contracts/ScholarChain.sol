@@ -7,7 +7,7 @@ contract ScholarChain {
     uint numScholarships;
 
     mapping (address => Person) people;
-    mapping (uint => scholarShip) scholarships;
+    mapping (uint => Scholarship) scholarships;
   }
 
   struct Person  {
@@ -16,14 +16,14 @@ contract ScholarChain {
     bool isReviewer;
   }
 
-  struct scholarShipData {
+  struct ScholarshipData {
     string dataHash;
     uint dollarValue;
   }
 
-  struct scholarShip {
-    scholarShipData data;
-    uint numRegisterApplicants;
+  struct Scholarship {
+    ScholarshipData data;
+    uint numRegisteredApplicants;
     mapping (uint => address) applicants;
   }
 
@@ -41,16 +41,21 @@ contract ScholarChain {
   }
 
   function addScholarship(string hashval, uint value) {
-    thisOrg.scholarships[thisOrg.numScholarships++] = scholarShip(scholarShipData(hashval,value), 0);
+    thisOrg.scholarships[thisOrg.numScholarships++] = Scholarship(ScholarshipData(hashval,value), 0);
   }
 
-  function getNumOfScholarships() returns (uint numOfScholarships) {
+  function getNumOfScholarships() constant returns (uint numOfScholarships) {
       return thisOrg.numScholarships;
   }
 
-  function isReviewer(address id) constant returns (bool){
-    return thisOrg.people[id].isReviewer;
+  function addApplicantToScholarship(address stuId, uint sIndex) {
+    if(isRegistered(stuId) && !isReviewer(stuId)){
+      Scholarship s = thisOrg.scholarships[sIndex];
+      s.applicants[s.numRegisteredApplicants++] = stuId;
+    }
   }
+
+  //function approveApplicant(address stuId, 
 
 
   function isRegistered(address id) constant returns (bool exists){
@@ -58,21 +63,21 @@ contract ScholarChain {
   }
 
   function registerPerson(address id, string ipfsHash){
-    if(!thisOrg.people[id].exists){
+    if(!isRegistered(id)){
       thisOrg.people[id] = Person(ipfsHash, true, false);
     }
   }
 
-  function returnAString() constant returns (string aStr){
-    return thisOrg.name;
+
+
+
+  function isReviewer(address id) constant returns (bool){
+    return thisOrg.people[id].isReviewer;
   }
+
   function addReviewer(address id)  returns (bool registered){
-    if(!isRegistered(id)){
-      return false;
-    }
-    else  {
+    if(isRegistered(id)){
       thisOrg.people[id].isReviewer = true;
-      return true;
     }
   }
 
