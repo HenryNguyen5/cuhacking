@@ -13,6 +13,7 @@ $(document).ready(function() {
   ScholarChain.getNumOfScholarships().then((num) => {
     num = num.toNumber()
     let scholarships = []
+
     for(let i = 0;i<num;i++){
       scholarships.append(ScholarChain.getScholarship(i))
     }
@@ -50,11 +51,58 @@ $(document).ready(function() {
     let deadline = $("#create input.scholar-deadline").val();
     let scholarship = {title, description, value, release, deadline}
     EmbarkJS.Storage.saveText(JSON.stringify(scholarship)).then((hash) => {
-       console.log(JSON.stringify("Scholarship '" + title +  "' was saved with hash " + hash));
+       console.log("Scholarship '" + title +  "' was saved with hash " + hash);
        ScholarChain.addScholarship(hash, value*18.81*10000000000000000000).then((result) => {
          console.log('Successful:'+ [Boolean(result),String(result),Number(result),Boolean(result)]);
        })
     });
+  });
+
+  $("button.addScholarship").click(function() {
+    let scholarship = {title:'title', description:'description', value:10, release:'release', deadline:'deadline'}
+    EmbarkJS.Storage.saveText(JSON.stringify(scholarship)).then((hash) => {
+       console.log("Scholarship was saved with hash " + hash);
+       ScholarChain.addScholarship(hash, 10).then((result) => {
+         console.log('Successful:'+ result);
+       })
+    });
+  });
+  $("button.addUser").click(function() {
+    let user = {name:'name',wallet:'0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7'}
+
+    EmbarkJS.Storage.saveText(JSON.stringify(user)).then((hash) => {
+       console.log(JSON.stringify("User was saved with hash " + hash));
+       ScholarChain.registerPerson('0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7', hash).then((result) => {
+         console.log('Successful:'+ result);
+       })
+    });
+  });
+  $("button.getNumSchol").click(function() {
+    ScholarChain.getNumOfScholarships().then((num) => {
+      num = num.toNumber()
+      console.log("Number of Scholarships:", num);
+    })
+  });
+
+  $("button.isRegistered").click(function() {
+    let user = '0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7'
+    let user2 = '0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d8'
+
+    EmbarkJS.Storage.saveText(JSON.stringify(user)).then((hash) => {
+       console.log(JSON.stringify("User was saved with hash " + hash));
+       ScholarChain.isRegistered(user).then((result) => {
+         console.log('Should be True:'+ result);
+         ScholarChain.isRegistered(user2).then((result) => {
+           console.log('Should be False:'+ result);
+         })
+       })
+    });
+  });
+  $("button.getNumSchol").click(function() {
+    ScholarChain.getNumOfScholarships().then((num) => {
+      num = num.toNumber()
+      console.log("Number of Scholarships:", num);
+    })
   });
 
 });
