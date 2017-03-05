@@ -58,6 +58,7 @@ $(document).ready(function() {
     });
   });
 
+  //Testing Buttons
   $("button.addScholarship").click(function() {
     let scholarship = {title:'title', description:'description', value:10, release:'release', deadline:'deadline'}
     EmbarkJS.Storage.saveText(JSON.stringify(scholarship)).then((hash) => {
@@ -68,11 +69,11 @@ $(document).ready(function() {
     });
   });
   $("button.addUser").click(function() {
-    let user = {name:'name',wallet:'0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7'}
+    let user = {name:'name',wallet:0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7}
 
     EmbarkJS.Storage.saveText(JSON.stringify(user)).then((hash) => {
        console.log(JSON.stringify("User was saved with hash " + hash));
-       ScholarChain.registerPerson('0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7', hash).then((result) => {
+       ScholarChain.registerPerson(0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7, hash).then((result) => {
          console.log('Successful:'+ result);
        })
     });
@@ -85,8 +86,8 @@ $(document).ready(function() {
   });
 
   $("button.isRegistered").click(function() {
-    let user = '0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7'
-    let user2 = '0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d8'
+    let user = 0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d7
+    let user2 = 0x21ca6c691355aac28a77b16f0e1d1f6c59973a8f053cdc64ab51c6aebd9db2d8
 
     EmbarkJS.Storage.saveText(JSON.stringify(user)).then((hash) => {
        console.log(JSON.stringify("User was saved with hash " + hash));
