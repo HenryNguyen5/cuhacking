@@ -10,9 +10,9 @@ contract ScholarChain {
     mapping (uint => scholarShip) scholarships;
   }
 
-  struct Person {
-    bool exists;
+  struct Person  {
     string data;
+    bool exists;
     bool isReviewer;
   }
 
@@ -29,11 +29,15 @@ contract ScholarChain {
 
   Organization thisOrg;
 
-  function ScholarChain(string name) {
+  function ScholarChain(string name)  {
     thisOrg.name = name;
     thisOrg.orgAddress = msg.sender;
     thisOrg.numScholarships = 0;
     addReviewer(msg.sender);
+  }
+
+  function getScholarship(uint index) constant returns (string){
+      return thisOrg.scholarships[index].data.dataHash;
   }
 
   function addScholarship(string hashval, uint value) {
@@ -44,18 +48,26 @@ contract ScholarChain {
       return thisOrg.numScholarships;
   }
 
-  function registerPerson(address id, string ipfsHash) returns (bool registered){
+  function isReviewer(address id) constant returns (bool){
+    return thisOrg.people[id].isReviewer;
+  }
+
+
+  function isRegistered(address id) constant returns (bool exists){
+      return thisOrg.people[id].exists;
+  }
+
+  function registerPerson(address id, string ipfsHash){
     if(!thisOrg.people[id].exists){
-      return false;
-    }
-     else {
-      thisOrg.people[id] = Person(true, ipfsHash, false);
-      return true;
+      thisOrg.people[id] = Person(ipfsHash, true, false);
     }
   }
 
+  function returnAString() constant returns (string aStr){
+    return thisOrg.name;
+  }
   function addReviewer(address id)  returns (bool registered){
-    if(!thisOrg.people[id].exists){
+    if(!isRegistered(id)){
       return false;
     }
     else  {
