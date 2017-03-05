@@ -20,7 +20,10 @@ $(document).ready(function() {
       "releaseDate": "09/09/2017",
       "deadline": "09/01/2017"
     }
-    EmbarkJS.Storage.saveText(JSON.stringify(s)).then((hash) => {
+    s = JSON.stringify(s);
+    console.log(s);
+    EmbarkJS.Storage.saveText(s).then(function(err, hash) {
+      console.log(err, hash);
       console.log("scholarship was saved with hash" + hash);
     });
     //addToLog("#register", "EmbarkJS.Storage.saveText('" + value + "').then(function(hash) { })");
