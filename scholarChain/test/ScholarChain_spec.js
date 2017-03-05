@@ -6,9 +6,16 @@ var web3 = EmbarkSpec.web3;
 describe("ScholarChain", function() {
 	before(function(done) {
 		var contractsConfig = {
-			"ScholarChain": {
-				args: ["hiMike"]
-			}
+      "default": {
+        "gas": "3000000",
+        "contracts": {
+          "SimpleStorage": {
+            "args": [
+              100
+            ]
+          }
+        }
+      }
 		};
 		EmbarkSpec.deployAll(contractsConfig, done);
 	});
@@ -18,7 +25,6 @@ describe("ScholarChain", function() {
 			process.stdout.write(result);
 			assert.equal(result, "hiMike");
 			done();
-			true
 		});
 	});
 
@@ -31,7 +37,8 @@ describe("ScholarChain", function() {
 	});
 
 	let testAddr = '0x5D3d173994718740A4E613Fe81E5d4583Ed84Ae1';
-	it("Should return true", function(done) {
+
+	it("Registering person then checking if they exist, should return true", function(done) {
 		ScholarChain.registerPerson(testAddr, 'ipfsHash', function(err, result) {
 			ScholarChain.isRegistered(testAddr, function(err, result) {
 				console.log(result);
@@ -41,12 +48,60 @@ describe("ScholarChain", function() {
 		});
 	});
 
-	it("Should return false", function(done) {
+	it("Checking recent added person to check if they are a reviewer, should return false", function(done) {
 		ScholarChain.isReviewer(testAddr, function(err, result) {
 			console.log(result);
 			assert.equal(result, false);
 			done();
 		});
 	});
+
+  it("should have 0 scholarships in org", function(done){
+    ScholarChain.getNumOfScholarships().then(function(res){
+      assert.equal(res.toNumber(), 0);
+      done();
+    });
+  });
+
+
+  let scholarship = {hashval: 'ipfshashvalHere', value: 1092312310231};
+  it("should added a scholarship", function(done){
+    ScholarChain.addScholarship(scholarship.hashval, scholarship.value, function(err, res){
+      console.log(res);
+      done();
+    });
+  });
+
+
+  it("should have 1 scholarships in org", function(done){
+    ScholarChain.getNumOfScholarships(function(res){
+      assert.equal(res.toNumber(), 1);
+      done();
+    });
+  });
+
+  it("should get the one scholarship", function(done){
+    ScholarChain.getScholarship(0).then(function(res){
+      console.log(res);
+      assert.equal(typeof(res), 'string');
+      done();
+    });
+  });
+
+  it("should register person to the one scholarship", function(done){
+    ScholarChain.addApplicantToScholarship(testAddr, 0, function(err,res){
+      ScholarChain.getNumOfScholarshipStuAppedTo(testAddr, function (err,res){
+        let index = res - 1;
+        console.log(index);
+        scholarChain.getScholarshipStuAppedTo(testAddr, index, function(err,res) {
+          console.log(res);
+          assert.equal(typeof(res), 'string');
+          done();
+        });
+      });
+    });
+  });
+
+
 
 });

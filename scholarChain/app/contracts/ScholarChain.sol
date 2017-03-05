@@ -14,6 +14,8 @@ contract ScholarChain {
     string data;
     bool exists;
     bool isReviewer;
+    uint numOfSAppedTo;
+    mapping(uint => string) sAppedTo;
   }
 
   struct ScholarshipData {
@@ -48,15 +50,31 @@ contract ScholarChain {
       return thisOrg.numScholarships;
   }
 
+  
   function addApplicantToScholarship(address stuId, uint sIndex) {
     if(isRegistered(stuId) && !isReviewer(stuId)){
+      Person stu = thisOrg.people[stuId];
       Scholarship s = thisOrg.scholarships[sIndex];
       s.applicants[s.numRegisteredApplicants++] = stuId;
+      stu.sAppedTo[stu.numOfSAppedTo++] = s.data.dataHash;
     }
   }
 
-  //function approveApplicant(address stuId, 
 
+  function getNumOfScholarshipStuAppedTo(address stuId) constant returns (uint) {
+    if(isRegistered(stuId) && !isReviewer(stuId)){
+      Person stu = thisOrg.people[stuId];
+      return stu.numOfSAppedTo;
+
+    }
+  }
+
+  function getScholarshipStuAppedTo(address stuId, uint scholIdx) constant returns (string){
+      if(isRegistered(stuId) && !isReviewer(stuId)){
+        Person stu = thisOrg.people[stuId];
+        return stu.sAppedTo[scholIdx];
+      }
+  }
 
   function isRegistered(address id) constant returns (bool exists){
       return thisOrg.people[id].exists;
@@ -64,7 +82,7 @@ contract ScholarChain {
 
   function registerPerson(address id, string ipfsHash){
     if(!isRegistered(id)){
-      thisOrg.people[id] = Person(ipfsHash, true, false);
+      thisOrg.people[id] = Person(ipfsHash, true, false, 0);
     }
   }
 
