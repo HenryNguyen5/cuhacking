@@ -2,6 +2,10 @@
   "0xb6cfeab83614da04c03db0fb8a6787a45d0be8d576fcc6f8f457a5a816d22ab3": {
     "name": "development",
     "contracts": {
+      "0x2af3ee7c3bf4b5703f6f8df386fb921e81c190174a9ab3c38751067c4128d545": {
+        "address": "0xa150d941e5bb6dbb6d0ab0edd3a567698d9e0d5b",
+        "name":    "SimpleStorage"
+      },
       "0x75597bd7e05d7ca41e548c730f3a12e1f21f0f1f75c9db60c3c8e257e3d0793e": {
         "address": "0x2449ca7c11073104d80dde9654de038db8431850",
         "name":    "ScholarChain"
@@ -13,6 +17,10 @@
       "0xad0ab10070707a8d9b7c32eae670ce9a0f75e0b6532d576bca60d0fd8059735d": {
         "address": "0x387588127c16a5012c62a53055ea3cd2407f21da",
         "name":    "SimpleStorage"
+      },
+      "0xd8cbdf241d0edd8ef1946908c99c67addc21fdfbcba2e7da0ea07d87a621a7e2": {
+        "address": "0xf978e340889f49adbffaf1231b252681b82edbe5",
+        "name":    "ScholarChain"
       }
     }
   }
